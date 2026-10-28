@@ -220,6 +220,18 @@
   .oline-count { font-size: 11px; letter-spacing: 0.08em; color: var(--l1); white-space: nowrap; }
   .oline-sign { display: inline-block; width: 20px; text-align: center; font-size: 18px; font-weight: 200; color: #fff; }
 </style>
+<!-- Yandex.Metrika counter -->
+<script>
+window.YM_ID=113842373;
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(113842373,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+window.ymGoal=function(g,p){try{ym(113842373,"reachGoal",g,p||{})}catch(e){}};
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113842373" style="position:absolute;left:-9999px;" alt=""></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <div id="root"></div>
@@ -3364,10 +3376,10 @@ function StepRecipe({
     className: "action-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "offer-btn",
-    onClick: () => setOfferOpen(!offerOpen)
+    onClick: () => { if (!offerOpen && window.ymGoal) ymGoal("offer_home"); setOfferOpen(!offerOpen); }
   }, "Предложите клиенту домой"), /*#__PURE__*/React.createElement("div", {
     className: "action-btn",
-    onClick: downloadRecipe
+    onClick: () => { window.ymGoal && ymGoal("recipe_save"); downloadRecipe(); }
   }, "Сохранить рецепт")), offerOpen && /*#__PURE__*/React.createElement("div", {
     className: "offer-panel"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3794,6 +3806,7 @@ function App() {
     }
   };
   const goTo = i => {
+    window.ymGoal && ymGoal("step_" + i);
     setStep(i);
     setMaxStep(Math.max(maxStep, i));
   };
@@ -3806,7 +3819,7 @@ function App() {
   return /*#__PURE__*/React.createElement("div", {
     className: "app deluxe-only"
   }, screen === "start" ? /*#__PURE__*/React.createElement(StartPage, {
-    onStart: () => setScreen("calc")
+    onStart: () => { window.ymGoal && ymGoal("calc_start"); setScreen("calc"); }
   }) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(StepHero, {
     step: step
   }), /*#__PURE__*/React.createElement("div", {
